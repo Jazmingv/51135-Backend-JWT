@@ -1,0 +1,51 @@
+{{#if isValid}}
+<div>
+	<h1>
+		Hello {{this.user.name}}
+	</h1>
+</div>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Product</th>
+				<th>Description</th>
+				<th>Category</th>
+				<th>Price</th>
+				<th>Add to Current Cart</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each payload}}
+			<tr>
+				<td>{{this.title}}</td>
+				<td>{{this.description}}</td>
+				<td>{{this.category}}</td>
+				<td>{{this.price}}</td>
+				<td>
+					<form action="/api/carts/64504405a6b06032fa2735f8/products/{{this._id}}" method="post">
+						<button type="submit">
+							Add to cart
+						</button>
+					</form>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+<br />
+<div>
+	{{#if hasPrevPage}}
+	<a href={{result.prevLink}}><< Prev</a>
+	{{/if}}
+	&nbsp;
+	{{this.page}}
+	&nbsp;
+	{{#if hasNextPage}}
+	<a href={{result.nextLink}}>Next >></a>
+	{{/if}}
+</div>
+{{else}}
+<h1>No more products</h1>
+{{/if}}
